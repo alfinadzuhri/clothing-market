@@ -7,7 +7,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class InventoryRequest {
+public class NewProductRequest {
     private String merchantUsername;
     private String productName;
     private String productDescription;

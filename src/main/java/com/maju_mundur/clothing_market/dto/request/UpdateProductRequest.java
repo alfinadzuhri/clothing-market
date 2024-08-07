@@ -1,4 +1,4 @@
-package com.maju_mundur.clothing_market.dto.response;
+package com.maju_mundur.clothing_market.dto.request;
 
 import lombok.*;
 
@@ -7,9 +7,9 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ProductResponse {
-    private String merchantUsername;
+public class UpdateProductRequest {
     private String productId;
+    private String merchantUsername;
     private String productName;
     private String productDescription;
     private Long price;

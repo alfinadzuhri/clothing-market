@@ -30,6 +30,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(req -> req
                         .dispatcherTypeMatchers(DispatcherType.ERROR).permitAll()
                         .requestMatchers("/api/v1/auth/**").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/api/v1/products").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(
