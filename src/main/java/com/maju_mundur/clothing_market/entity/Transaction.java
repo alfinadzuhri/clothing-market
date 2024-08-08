@@ -1,9 +1,12 @@
 package com.maju_mundur.clothing_market.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.maju_mundur.clothing_market.constant.ConstantTable;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.Date;
+import java.util.List;
 
 @Setter
 @Getter
@@ -13,4 +16,21 @@ import lombok.*;
 @Entity
 @Table(name = ConstantTable.TRANSACTION)
 public class Transaction {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
+
+    @ManyToOne
+    @JoinColumn(name = "customer_id", nullable = false)
+    private Customer customer;
+
+    @Column(name = "transaction_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date transactionDate;
+
+    @OneToMany(mappedBy = "transaction")
+    @JsonManagedReference
+    private List<TransactionDetail> transactionDetail;
+
 }

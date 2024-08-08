@@ -12,8 +12,8 @@ import java.util.Date;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = ConstantTable.ORDERED_REWARD)
-public class OrderedReward {
+@Table(name = ConstantTable.ORDERED_HISTORY)
+public class OrderedHistory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -24,17 +24,19 @@ public class OrderedReward {
     private Customer customer;
 
     @ManyToOne
-    @JoinColumn(name = "reward_id", nullable = false)
-    private Reward reward;
+    @JoinColumn(name = "merchant_id", nullable = false)
+    private Merchant merchant;
 
-    @Column(name = "points")
-    private Integer points = 0;
+    @ManyToOne
+    @JoinColumn(name = "product_id", nullable = false)
+    private Product product;
 
-    @Column(name = "created_at", updatable = false, nullable = false)
+    @Column(name = "created_at", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
 
     @Column(name = "updated_at", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
+
 }

@@ -1,5 +1,6 @@
 package com.maju_mundur.clothing_market.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.maju_mundur.clothing_market.constant.ConstantTable;
 import jakarta.persistence.*;
 import lombok.*;
@@ -12,23 +13,23 @@ import java.util.Date;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = ConstantTable.ORDERED_REWARD)
-public class OrderedReward {
+@Table(name = ConstantTable.REWARD_RULES)
+public class RewardRules {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id", nullable = false)
-    private Customer customer;
-
-    @ManyToOne
     @JoinColumn(name = "reward_id", nullable = false)
+    @JsonBackReference
     private Reward reward;
 
-    @Column(name = "points")
-    private Integer points = 0;
+    @Column(name = "threshold", nullable = false)
+    private Long threshold;
+
+    @Column(name = "reward_value", nullable = false)
+    private Integer rewardValue;
 
     @Column(name = "created_at", updatable = false, nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -37,4 +38,5 @@ public class OrderedReward {
     @Column(name = "updated_at", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
+
 }
